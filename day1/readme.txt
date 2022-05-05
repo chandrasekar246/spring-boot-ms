@@ -29,3 +29,33 @@ management.endpoints.web.exposure.include=*
 http://localhost:8080/my-actuator/metrics/disk.free
 
 =========================================
+Deploy war in external server
+=============================
+
+<packaging>war</packaging>
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-web</artifactId>
+	<exclusions>
+		<exclusion>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</exclusion>
+	</exclusions>
+</dependency>
+<dependency>
+	<groupId>javax.servlet</groupId>
+	<artifactId>javax.servlet-api</artifactId>
+	<scope>provided</scope>
+</dependency>
+
+- Extend SpringBootServletInitializer and override configure(SpringApplicationBuilder builder)
+
+- mvn clean package
+
+http://localhost:8080/external-server/
+
+NOTE: Won't work with Tomcat 10 (https://github.com/spring-projects/spring-boot/issues/22414)
+
+=========================================
