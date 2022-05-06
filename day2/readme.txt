@@ -26,7 +26,16 @@ Spring Data JPA
 	- As Page might be expensive, you can instead return a Slice. 
 	- Slice knows only about whether a next Slice is available, which might be sufficient when walking through a larger result set.
 
-http://localhost:8080/employee
+http://localhost:8080
+GET /employee
+GET /sort/{columnName}
+GET /page/{size}
+GET /id/{id}
+GET /name/{name}
+GET /search/name/{name}
+POST /employee
+DELETE /{id}
+
 
 https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
 
