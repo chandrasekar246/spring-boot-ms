@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.chandrasekar246.geh.entity.Employee;
+import com.github.chandrasekar246.geh.model.EmployeeDTO;
 import com.github.chandrasekar246.geh.service.EmployeeService;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
+	@Autowired
 	private EmployeeService employeeService;
-
-	public EmployeeController(EmployeeService employeeService) {
-		this.employeeService = employeeService;
-	}
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@GetMapping
 	public List<Employee> findAllEmployees() {
@@ -60,7 +63,10 @@ public class EmployeeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> addEmployee(@Valid @RequestBody Employee employee) {
+	public ResponseEntity<String> addEmployee(@Valid @RequestBody EmployeeDTO employeeDto) {
+		
+		Employee employee = modelMapper.map(employeeDto, Employee.class);
+		
 		employeeService.addEmployee(employee);
 		
 		return new ResponseEntity<>(HttpStatus.CREATED);
