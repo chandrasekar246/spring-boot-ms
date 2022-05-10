@@ -58,8 +58,13 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/pattern/name/{name}")
-	public List<Employee> findByNamePattern(@PathVariable String name) {
+	public List<Employee> findByFirstNamePattern(@PathVariable String name) {
 		return employeeService.findByFirstNamePattern(name);
+	}
+	
+	@GetMapping("/pattern/lname/{name}")
+	public List<Employee> findByLastNamePattern(@PathVariable String name) {
+		return employeeService.findByLastNamePattern(name);
 	}
 
 	@PostMapping
