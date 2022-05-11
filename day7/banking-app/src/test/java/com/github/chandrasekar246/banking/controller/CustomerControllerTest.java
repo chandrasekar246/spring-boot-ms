@@ -69,7 +69,7 @@ public class CustomerControllerTest {
 
 		mockMvc.perform(post("/customer/").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
-				.andExpect(jsonPath("$.id", Matchers.equalTo(id)));
+				.andExpect(jsonPath("$.amount", Matchers.equalTo(1000.0)));
 	}
 
 	private Customer createCustomer(int id) {
