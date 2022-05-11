@@ -12,12 +12,12 @@ import com.github.chandrasekar246.banking.controller.CustomerController;
 class BankingApplicationTests {
 	
 	@Autowired
-	private CustomerController employeeController;
+	private CustomerController customerController;
 
 	@Test
 	void contextLoads() {
 		
-		assertThat(employeeController).isNotNull();
+		assertThat(customerController).isNotNull();
 	}
 
 }
