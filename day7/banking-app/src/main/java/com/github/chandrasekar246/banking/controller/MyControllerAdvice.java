@@ -32,45 +32,42 @@ public class MyControllerAdvice {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
 		Map<String, String> errors = new HashMap<>();
-		ex.getBindingResult().getAllErrors().forEach((error) -> {
+		ex.getBindingResult().getAllErrors().forEach(error -> {
 			String fieldName = ((FieldError) error).getField();
 			String errorMessage = error.getDefaultMessage();
 			errors.put(fieldName, errorMessage);
 		});
-		return new ErrorResponse(ErrorCode.getErrorCode(MethodArgumentNotValidException.class).get(),
-				errors.toString());
+		return new ErrorResponse(ErrorCode.getErrorCode(MethodArgumentNotValidException.class), errors.toString());
 	}
 
 	@ExceptionHandler(value = { InvalidDefinitionException.class })
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ErrorResponse invalidDefinitionException(Exception ex) {
-		return new ErrorResponse(ErrorCode.getErrorCode(InvalidDefinitionException.class).get(),
-				ex.getLocalizedMessage());
+		return new ErrorResponse(ErrorCode.getErrorCode(InvalidDefinitionException.class), ex.getLocalizedMessage());
 	}
 
 	@ExceptionHandler(value = { Exception.class })
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ErrorResponse unKnownException(Exception ex) {
-		return new ErrorResponse(ErrorCode.getErrorCode(Exception.class).get(), ex.getLocalizedMessage());
+		return new ErrorResponse(ErrorCode.getErrorCode(Exception.class), ex.getLocalizedMessage());
 	}
 
 	@ExceptionHandler(value = { IOException.class })
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse badRequest(IOException ex) {
-		return new ErrorResponse(ErrorCode.getErrorCode(IOException.class).get(), ex.getLocalizedMessage());
+		return new ErrorResponse(ErrorCode.getErrorCode(IOException.class), ex.getLocalizedMessage());
 	}
 
 	@ExceptionHandler(value = { PropertyReferenceException.class })
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse propertyReferenceException(PropertyReferenceException ex) {
-		return new ErrorResponse(ErrorCode.getErrorCode(PropertyReferenceException.class).get(),
-				ex.getLocalizedMessage());
+		return new ErrorResponse(ErrorCode.getErrorCode(PropertyReferenceException.class), ex.getLocalizedMessage());
 	}
 
 	@ExceptionHandler(value = { DataIntegrityViolationException.class })
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse propertyReferenceException(DataIntegrityViolationException ex) {
-		return new ErrorResponse(ErrorCode.getErrorCode(DataIntegrityViolationException.class).get(),
+		return new ErrorResponse(ErrorCode.getErrorCode(DataIntegrityViolationException.class),
 				ex.getMostSpecificCause().getLocalizedMessage());
 	}
 
@@ -80,6 +77,6 @@ public class MyControllerAdvice {
 			InsufficientBalanceException.class, DateRangeMismatchException.class })
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse invalidDepartmentException(Exception ex) {
-		return new ErrorResponse(ErrorCode.getErrorCode(ex.getClass()).get(), ex.getLocalizedMessage());
+		return new ErrorResponse(ErrorCode.getErrorCode(ex.getClass()), ex.getLocalizedMessage());
 	}
 }

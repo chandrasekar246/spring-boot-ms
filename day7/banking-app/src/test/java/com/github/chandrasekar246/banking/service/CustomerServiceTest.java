@@ -16,7 +16,7 @@ import com.github.chandrasekar246.banking.exception.InvalidCustomerIdException;
 import com.github.chandrasekar246.banking.repository.CustomerRepository;
 
 @SpringBootTest(classes = CustomerService.class)
-public class CustomerServiceTest {
+class CustomerServiceTest {
 	@Autowired
 	private CustomerService customerService;
 
@@ -24,7 +24,7 @@ public class CustomerServiceTest {
 	private CustomerRepository customerRepository;
 
 	@Test
-	public void findByIdTest() throws Exception {
+	void findByIdTest() throws Exception {
 
 		int id = 1;
 
@@ -38,7 +38,7 @@ public class CustomerServiceTest {
 	}
 
 	@Test
-	public void findByIdNegativeTest() {
+	void findByIdNegativeTest() {
 
 		int id = 1;
 

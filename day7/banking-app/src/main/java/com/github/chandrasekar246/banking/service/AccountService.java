@@ -40,7 +40,7 @@ public class AccountService {
 
 	public Account updateAmount(String accountNumber, double amount) {
 
-		Account account = findByAccountNumber(accountNumber);
+		var account = findByAccountNumber(accountNumber);
 
 		account.setAmount(amount);
 

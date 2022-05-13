@@ -23,7 +23,7 @@ import com.github.chandrasekar246.banking.service.AccountService;
 import com.github.chandrasekar246.banking.service.CustomerService;
 
 @WebMvcTest(controllers = CustomerController.class)
-public class CustomerControllerTest {
+class CustomerControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -42,7 +42,7 @@ public class CustomerControllerTest {
 	}
 
 	@Test
-	public void findByIdTest() throws Exception {
+	void findByIdTest() throws Exception {
 
 		int id = 1;
 
@@ -55,7 +55,7 @@ public class CustomerControllerTest {
 	}
 
 	@Test
-	public void postTest() throws Exception {
+	void postTest() throws Exception {
 
 		int id = 2;
 

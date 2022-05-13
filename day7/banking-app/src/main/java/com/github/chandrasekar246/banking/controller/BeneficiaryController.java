@@ -42,11 +42,11 @@ public class BeneficiaryController {
 	@PostMapping
 	public ResponseEntity<Beneficiary> add(@Valid @RequestBody BeneficiaryDTO beneficiaryDTO) {
 
-		Beneficiary beneficiary = modelMapper.map(beneficiaryDTO, Beneficiary.class);
+		var beneficiary = modelMapper.map(beneficiaryDTO, Beneficiary.class);
 
 		beneficiary = beneficiaryService.add(beneficiary);
 
-		return new ResponseEntity<Beneficiary>(beneficiary, HttpStatus.CREATED);
+		return new ResponseEntity<>(beneficiary, HttpStatus.CREATED);
 	}
 
 }

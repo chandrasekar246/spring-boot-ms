@@ -2,7 +2,6 @@ package com.github.chandrasekar246.banking.model;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.mapping.PropertyReferenceException;
@@ -34,9 +33,9 @@ public enum ErrorCode {
 		this.throwable = throwable;
 	}
 
-	public static Optional<ErrorCode> getErrorCode(Class<? extends Throwable> throwable) {
+	public static ErrorCode getErrorCode(Class<? extends Throwable> throwable) {
 		return Arrays.stream(ErrorCode.values()).filter(throwable2 -> throwable2.getThrowable().equals(throwable))
-				.findFirst();
+				.findFirst().orElse(ERR1001);
 	}
 
 }

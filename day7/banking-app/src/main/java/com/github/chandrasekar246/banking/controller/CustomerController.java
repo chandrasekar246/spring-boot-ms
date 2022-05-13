@@ -1,5 +1,6 @@
 package com.github.chandrasekar246.banking.controller;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -34,6 +35,8 @@ public class CustomerController {
 
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	private Random random = new SecureRandom(); 
 
 	@GetMapping
 	public List<Customer> findAll() {
@@ -48,13 +51,13 @@ public class CustomerController {
 	@PostMapping
 	public ResponseEntity<Account> add(@Valid @RequestBody CustomerDTO customerDTO) {
 
-		Customer customer = modelMapper.map(customerDTO, Customer.class);
+		var customer = modelMapper.map(customerDTO, Customer.class);
 
 		customer = customerService.add(customer);
 
-		Account account = accountService.add(new Account(0, String.format("%06d", new Random().nextInt(999999)), 1000, customer));
+		var account = accountService.add(new Account(0, String.format("%06d", random.nextInt(999999)), 1000, customer));
 
-		return new ResponseEntity<Account>(account, HttpStatus.CREATED);
+		return new ResponseEntity<>(account, HttpStatus.CREATED);
 	}
 
 }
