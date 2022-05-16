@@ -55,6 +55,7 @@ class CustomerServiceTest {
 	}
 
 	private Customer createCustomer(int id) {
-		return new Customer(id, "Anand", "3, Vivekandar Street", "HCL", "A-1234567", "abc@xyz.com", "9876543210", null);
+		return new Customer(id, "Anand", "3, Vivekandar Street", "HCL", "A-1234567", "abc@xyz.com", "9876543210",
+				"chandra123", "chandra123", null);
 	}
 }

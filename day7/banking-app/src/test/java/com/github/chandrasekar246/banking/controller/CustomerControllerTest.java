@@ -30,7 +30,7 @@ class CustomerControllerTest {
 
 	@MockBean
 	private CustomerService customerService;
-	
+
 	@MockBean
 	private AccountService accountService;
 
@@ -60,7 +60,7 @@ class CustomerControllerTest {
 		int id = 2;
 
 		Customer customer = createCustomer(id);
-		
+
 		Mockito.when(accountService.add(ArgumentMatchers.any())).thenReturn(new Account(id, "123456", 1000, customer));
 
 		Mockito.when(customerService.add(ArgumentMatchers.any())).thenReturn(customer);
@@ -73,6 +73,7 @@ class CustomerControllerTest {
 	}
 
 	private Customer createCustomer(int id) {
-		return new Customer(id, "Anand", "3, Vivekandar Street", "HCL", "A-1234567", "abc@xyz.com", "9876543210", null);
+		return new Customer(id, "Anand", "3, Vivekandar Street", "HCL", "A-1234567", "abc@xyz.com", "9876543210",
+				"chandra123", "chandra123", null);
 	}
 }

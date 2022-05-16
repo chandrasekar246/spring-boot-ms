@@ -48,7 +48,7 @@ public class CustomerController {
 		return customerService.findById(id);
 	}
 
-	@PostMapping
+	@PostMapping("/register")
 	public ResponseEntity<Account> add(@Valid @RequestBody CustomerDTO customerDTO) {
 
 		var customer = modelMapper.map(customerDTO, Customer.class);

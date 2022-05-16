@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.github.chandrasekar246.banking.config.JwtAuthenticationFilter;
 
 @SpringBootApplication
 public class BankingApplication {
@@ -22,5 +25,15 @@ public class BankingApplication {
 	@Bean
 	public ModelMapper modelMapper() {
 	    return new ModelMapper();
+	}
+	
+	@Bean
+	public BCryptPasswordEncoder encoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public JwtAuthenticationFilter authenticationTokenFilterBean() {
+		return new JwtAuthenticationFilter();
 	}
 }

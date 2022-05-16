@@ -37,4 +37,9 @@ public class CustomerDTO {
 
 	@Pattern(regexp = "^[6-9]\\d{9}$", message = "Mobile number format is invalid! Valid ex. 9876543210")
 	private String mobile;
+
+	@Pattern(regexp = "^[a-z0-9]{6,12}$", message = "username format is invalid! Allowed: Small-case alphabets, numerics with 6 to 12 chars Valid ex. chandra123")
+	private String username;
+
+	private String password;
 }
