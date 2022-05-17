@@ -14,25 +14,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.chandrasekar246.banking.config.JwtAuthenticationEntryPoint;
 import com.github.chandrasekar246.banking.entity.Account;
 import com.github.chandrasekar246.banking.entity.Customer;
 import com.github.chandrasekar246.banking.service.AccountService;
 import com.github.chandrasekar246.banking.service.CustomerService;
+import com.github.chandrasekar246.banking.util.JwtTokenUtil;
 
 @WebMvcTest(controllers = CustomerController.class)
 class CustomerControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-
+	
 	@MockBean
 	private CustomerService customerService;
 
 	@MockBean
 	private AccountService accountService;
+	
+	@MockBean
+	private JwtAuthenticationEntryPoint unauthorizedHandler;
+	
+	@MockBean
+	private JwtTokenUtil jwtTokenUtil;
 
 	private static ObjectMapper mapper;
 
@@ -42,6 +51,7 @@ class CustomerControllerTest {
 	}
 
 	@Test
+    @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
 	void findByIdTest() throws Exception {
 
 		int id = 1;
@@ -55,6 +65,7 @@ class CustomerControllerTest {
 	}
 
 	@Test
+	@WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
 	void postTest() throws Exception {
 
 		int id = 2;
@@ -67,7 +78,7 @@ class CustomerControllerTest {
 
 		String jsonRequest = mapper.writeValueAsString(customer);
 
-		mockMvc.perform(post("/customer/").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
+		mockMvc.perform(post("/customer/register").contentType(MediaType.APPLICATION_JSON).content(jsonRequest)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
 				.andExpect(jsonPath("$.amount", Matchers.equalTo(1000.0)));
 	}

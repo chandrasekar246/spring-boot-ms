@@ -17,7 +17,7 @@ import com.github.chandrasekar246.banking.entity.Customer;
 import com.github.chandrasekar246.banking.exception.InvalidCustomerIdException;
 import com.github.chandrasekar246.banking.repository.CustomerRepository;
 
-@Service (value = "customerService")
+@Service (value = "userDetailsService")
 public class CustomerService implements UserDetailsService {
 
 	@Autowired
