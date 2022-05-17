@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.github.chandrasekar246.banking.entity.Customer;
 import com.github.chandrasekar246.banking.exception.InvalidCustomerIdException;
@@ -22,6 +23,9 @@ class CustomerServiceTest {
 
 	@MockBean
 	private CustomerRepository customerRepository;
+	
+	@MockBean
+	private BCryptPasswordEncoder bcryptEncoder;
 
 	@Test
 	void findByIdTest() throws Exception {
