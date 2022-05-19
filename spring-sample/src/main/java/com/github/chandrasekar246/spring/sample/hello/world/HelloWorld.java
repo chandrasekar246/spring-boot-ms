@@ -13,11 +13,11 @@ public class HelloWorld {
 		this.message = message;
 	}
 
-	public void init() throws Exception {
+	public void init() {
 		System.out.println("Initialized: " + this);
 	}
 
-	public void dest() throws Exception {
+	public void dest() {
 		System.out.println("Destroying... " + this);
 	}
 }

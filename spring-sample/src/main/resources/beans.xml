@@ -6,6 +6,12 @@
 
 	<bean id="helloWorld"
 		class="com.github.chandrasekar246.spring.sample.hello.world.HelloWorld"
+		init-method="init" destroy-method="dest" lazy-init="true" >
+		<property name="message" value="Hello World!" />
+	</bean>
+	
+	<bean id="helloWorld2"
+		class="com.github.chandrasekar246.spring.sample.hello.world.HelloWorld"
 		init-method="init" destroy-method="dest" lazy-init="true" scope="prototype">
 		<property name="message" value="Hello World!" />
 	</bean>
