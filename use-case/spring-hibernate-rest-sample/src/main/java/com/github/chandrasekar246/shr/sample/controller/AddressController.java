@@ -15,41 +15,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.chandrasekar246.shr.sample.entity.Employee;
-import com.github.chandrasekar246.shr.sample.service.EmployeeService;
+import com.github.chandrasekar246.shr.sample.entity.Address;
+import com.github.chandrasekar246.shr.sample.service.AddressService;
 
 @RestController
-@RequestMapping("/employees")
-public class EmployeeController {
+@RequestMapping("/addresss")
+public class AddressController {
 
 	@Autowired
-	private EmployeeService employeeService;
+	private AddressService addressService;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HttpStatus> addEmployee(@RequestBody Employee employee) {
-		employeeService.addEmployee(employee);
+	public ResponseEntity<HttpStatus> addAddress(@RequestBody Address address) {
+		addressService.addAddress(address);
 
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Employee> listEmployees() {
-		return employeeService.listEmployees();
+	public List<Address> listAddress() {
+		return addressService.listAddress();
 	}
 
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Employee getEmployeeById(@PathVariable int id) {
-		return employeeService.getEmployeeById(id);
+	public Address getAddressById(@PathVariable int id) {
+		return addressService.getAddressById(id);
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateEmployee(@RequestBody Employee employee) {
-		employeeService.updateEmployee(employee);
+	public void updateAddress(@RequestBody Address address) {
+		addressService.updateAddress(address);
 	}
 
 	@DeleteMapping(path = "/{id}")
-	public void removeEmployee(@PathVariable int id) {
-		employeeService.removeEmployee(id);
+	public void removeAddress(@PathVariable int id) {
+		addressService.removeAddress(id);
 	}
 
 }

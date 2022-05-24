@@ -34,4 +34,10 @@ public class AppPropertiesConfiguration {
 	
 	@Value("${hibernate.hbm2ddl.auto}")
 	private String hibernateDdlAuto;
+	
+	@Value("${hibernate.validator.apply_to_ddl}")
+	private String hibernateApplyValidatorToDdl;
+	
+	@Value("${hibernate.check_nullability}")
+	private String hibernateCheckNullability;
 }

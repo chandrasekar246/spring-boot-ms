@@ -39,10 +39,14 @@ public class DIConfiguration {
 		sessionFactoryBean.setDataSource(dataSource());
 		sessionFactoryBean.setPackagesToScan("com.github.chandrasekar246.shr.sample.entity");
 
-		Properties hibernateProperties = new Properties(3);
+		Properties hibernateProperties = new Properties(5);
 		hibernateProperties.setProperty("hibernate.dialect", appPropertiesConfiguration.getHibernateDialect());
 		hibernateProperties.setProperty("hibernate.show_sql", appPropertiesConfiguration.getHibernateShowSql());
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", appPropertiesConfiguration.getHibernateDdlAuto());
+		hibernateProperties.setProperty("hibernate.validator.apply_to_ddl",
+				appPropertiesConfiguration.getHibernateApplyValidatorToDdl());
+		hibernateProperties.setProperty("hibernate.check_nullability",
+				appPropertiesConfiguration.getHibernateCheckNullability());
 
 		sessionFactoryBean.setHibernateProperties(hibernateProperties);
 

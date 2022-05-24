@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ffce5931-ab19-4e11-a438-aa73d7619d43",
+		"_postman_id": "e8c03040-66ed-4832-a239-eb566bc0c6fc",
 		"name": "spring-hibernate-rest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -71,7 +71,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"test\",\r\n    \"experience\": 10,\r\n    \"department\": \"BFSI\",\r\n    \"email\": \"abc@xyz.com\",\r\n    \"salary\": 122010.32\r\n}",
+					"raw": "{\r\n    \"name\": \"test3\",\r\n    \"experience\": 30,\r\n    \"department\": \"ABC\",\r\n    \"email\": \"test3@xyz.com\",\r\n    \"salary\": 30000.01\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -100,7 +100,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 7,\r\n    \"name\": \"test\",\r\n    \"experience\": 10,\r\n    \"department\": \"BFSI\",\r\n    \"email\": \"test@xyz.com\",\r\n    \"salary\": 122010.32\r\n}",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"test2\",\r\n    \"experience\": 20,\r\n    \"department\": \"ABC\",\r\n    \"email\": \"test2@xyz.com\",\r\n    \"salary\": 20000.01\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -128,7 +128,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/shr/employees/7",
+					"raw": "http://localhost:8080/shr/employees/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -137,7 +137,58 @@
 					"path": [
 						"shr",
 						"employees",
-						"7"
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/shr/employees/v2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": {\r\n        \"firstName\": \"firstName3\",\r\n        \"lastName\": \"lastName3\"\r\n    },\r\n    \"birthDate\": \"1988-12-21\",\r\n    \"email\": \"test4@xyz.com\",\r\n    \"department\": \"RETAIL\",\r\n    \"married\": false,\r\n    \"salary\": 333.33,\r\n    \"ovd\": {\r\n        \"pan\": \"pan3\",\r\n        \"passport\": \"passport3\"\r\n    },\r\n    \"address\": {\r\n        \"addressLine1\": \"addressLine13\",\r\n        \"addressLine2\": \"addressLine23\",\r\n        \"pincode\": \"678903\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/shr/employees/v2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shr",
+						"employees",
+						"v2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/shr/employees/v2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/shr/employees/v2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shr",
+						"employees",
+						"v2"
 					]
 				}
 			},
