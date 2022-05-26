@@ -19,7 +19,7 @@ public class UserService {
 		return repo.create(user);
 	}
 
-	public Optional<User> read(int id) {
+	public Optional<User> read(Integer id) {
 		return repo.read(id);
 	}
 

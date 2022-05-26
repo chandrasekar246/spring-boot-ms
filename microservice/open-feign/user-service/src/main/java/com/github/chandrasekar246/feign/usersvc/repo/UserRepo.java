@@ -20,8 +20,8 @@ public class UserRepo {
 	private static final int BOUND = 100;
 
 	static {
-		userSet.addAll(Arrays.asList(new User(random.nextInt(BOUND), "Anand", "anand@xyz.com"),
-				new User(random.nextInt(BOUND), "Balaji", "balaji@xyz.com")));
+		userSet.addAll(Arrays.asList(new User(random.nextInt(BOUND), "Anand", "anand@xyz.com", null),
+				new User(random.nextInt(BOUND), "Balaji", "balaji@xyz.com", null)));
 	}
 
 	public Optional<User> create(User user) {
@@ -33,8 +33,8 @@ public class UserRepo {
 		return Optional.empty();
 	}
 
-	public Optional<User> read(int id) {
-		return userSet.stream().filter(p -> p.getId() == id).findFirst();
+	public Optional<User> read(Integer id) {
+		return userSet.stream().filter(p -> p.getId().equals(id)).findFirst();
 	}
 
 	public Set<User> readAll() {

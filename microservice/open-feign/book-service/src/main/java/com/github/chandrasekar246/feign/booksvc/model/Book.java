@@ -1,11 +1,8 @@
-package com.github.chandrasekar246.feign.usersvc.model;
-
-import java.util.List;
+package com.github.chandrasekar246.feign.booksvc.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.EqualsAndHashCode.Exclude;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -14,15 +11,13 @@ import lombok.ToString;
 @Data
 @ToString
 @EqualsAndHashCode
-public class User {
+public class Book {
 
-	@Exclude
 	private Integer id;
 
-	@Exclude
-	private String name;
+	private String title;
 
-	private String email;
+	private String isbn;
 	
-	private List<Book> booksTaken;
+	private boolean available;
 }
