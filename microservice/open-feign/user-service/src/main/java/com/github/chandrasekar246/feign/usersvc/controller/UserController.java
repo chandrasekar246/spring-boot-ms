@@ -2,6 +2,7 @@ package com.github.chandrasekar246.feign.usersvc.controller;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -86,17 +87,21 @@ public class UserController {
 		if (optional.isPresent()) {
 			User user = optional.get();
 
-			Iterator<Book> iterator = user.getBooksTaken().iterator();
+			List<Book> booksTaken = user.getBooksTaken();
 
-			while (iterator.hasNext()) {
-				Book book = iterator.next();
-				
-				if (book.getId().equals(bookId)) {
-					List<Book> booksTaken = bookServiceClient.returnBook(userId, bookId);
+			if (Objects.nonNull(booksTaken)) {
+				Iterator<Book> iterator = booksTaken.iterator();
 
-					user.setBooksTaken(booksTaken);
+				while (iterator.hasNext()) {
+					Book book = iterator.next();
 
-					return new ResponseEntity<>(user, HttpStatus.OK);
+					if (book.getId().equals(bookId)) {
+						booksTaken = bookServiceClient.returnBook(userId, bookId);
+
+						user.setBooksTaken(booksTaken);
+
+						return new ResponseEntity<>(user, HttpStatus.OK);
+					}
 				}
 			}
 		}
