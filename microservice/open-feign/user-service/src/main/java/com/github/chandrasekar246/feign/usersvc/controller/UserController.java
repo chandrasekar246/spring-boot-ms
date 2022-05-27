@@ -51,6 +51,11 @@ public class UserController {
 	public Set<User> findAll() {
 		return service.findAll();
 	}
+	
+	@GetMapping("/library/port")
+	public String port() {
+		return bookServiceClient.port();
+	}
 
 	@GetMapping("/{userId}/library")
 	public ResponseEntity<List<Book>> findAllBooks(@PathVariable Integer userId) {
