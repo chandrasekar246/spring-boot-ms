@@ -39,15 +39,15 @@ public class BookRepo {
 		return Optional.empty();
 	}
 
-	public Optional<Book> read(int id) {
+	public Optional<Book> findById(int id) {
 		return libraryBooks.stream().filter(p -> p.getId() == id).findFirst();
 	}
 
-	public List<Book> readAll() {
+	public List<Book> findAll() {
 		return libraryBooks;
 	}
 
-	public List<Book> takeBook(Integer userId, Integer bookId) {
+	public List<Book> borrowBook(Integer userId, Integer bookId) {
 		Optional<Book> optional = libraryBooks.stream().filter(p -> p.getId().equals(bookId)).findFirst();
 
 		if (optional.isPresent() && optional.get().isAvailable()) {
@@ -55,6 +55,7 @@ public class BookRepo {
 
 			while (iterator.hasNext()) {
 				Book book = iterator.next();
+				
 				if (book.getId().equals(bookId)) {
 					book.setAvailable(false);
 					break;
@@ -62,10 +63,35 @@ public class BookRepo {
 			}
 
 			List<Book> booksTaken = usersWithBooks.get(userId);
+			
 			if (Objects.isNull(booksTaken)) {
-				booksTaken = new ArrayList<Book>();
+				booksTaken = new ArrayList<>();
 			}
+			
 			booksTaken.add(optional.get());
+			usersWithBooks.put(userId, booksTaken);
+		}
+
+		return usersWithBooks.get(userId);
+	}
+	
+	public List<Book> returnBook(Integer userId, Integer bookId) {
+		Optional<Book> optional = libraryBooks.stream().filter(p -> p.getId().equals(bookId)).findFirst();
+
+		if (optional.isPresent() && !optional.get().isAvailable()) {
+			Iterator<Book> iterator = libraryBooks.iterator();
+
+			while (iterator.hasNext()) {
+				Book book = iterator.next();
+				
+				if (book.getId().equals(bookId)) {
+					book.setAvailable(true);
+					break;
+				}
+			}
+
+			List<Book> booksTaken = usersWithBooks.get(userId);
+			booksTaken.remove(optional.get());
 			usersWithBooks.put(userId, booksTaken);
 		}
 

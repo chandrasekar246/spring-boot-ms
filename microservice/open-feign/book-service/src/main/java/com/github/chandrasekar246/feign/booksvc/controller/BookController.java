@@ -27,24 +27,31 @@ public class BookController {
 	@PostMapping
 	public ResponseEntity<Book> add(@RequestBody Book book) {
 		Optional<Book> optional = service.add(book);
+		
 		return optional.isPresent() ? new ResponseEntity<>(optional.get(), HttpStatus.CREATED)
 				: new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Book> read(@PathVariable Integer id) {
-		Optional<Book> optional = service.read(id);
+	public ResponseEntity<Book> findById(@PathVariable Integer id) {
+		Optional<Book> optional = service.findById(id);
+		
 		return optional.isPresent() ? new ResponseEntity<>(optional.get(), HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping
-	public List<Book> readAll() {
-		return service.readAll();
+	public List<Book> findAll() {
+		return service.findAll();
 	}
 
-	@GetMapping("/take")
-	public List<Book> take(@RequestParam Integer userId, @RequestParam Integer bookId) {
-		return service.takeBook(userId, bookId);
+	@GetMapping("/borrow")
+	public List<Book> borrowBook(@RequestParam Integer userId, @RequestParam Integer bookId) {
+		return service.borrowBook(userId, bookId);
+	}
+	
+	@GetMapping("/return")
+	public List<Book> returnBook(@RequestParam Integer userId, @RequestParam Integer bookId) {
+		return service.returnBook(userId, bookId);
 	}
 }

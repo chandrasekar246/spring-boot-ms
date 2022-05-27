@@ -19,12 +19,12 @@ public class UserService {
 		return repo.create(user);
 	}
 
-	public Optional<User> read(Integer id) {
-		return repo.read(id);
+	public Optional<User> findById(Integer id) {
+		return repo.findById(id);
 	}
 
-	public Set<User> readAll() {
-		return repo.readAll();
+	public Set<User> findAll() {
+		return repo.findAll();
 	}
 
 }

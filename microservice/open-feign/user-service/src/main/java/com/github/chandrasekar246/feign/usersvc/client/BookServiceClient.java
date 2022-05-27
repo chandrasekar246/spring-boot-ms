@@ -10,8 +10,13 @@ import com.github.chandrasekar246.feign.usersvc.model.Book;
 
 @FeignClient(name = "book-service", url = "http://localhost:8081/book-service/books")
 public interface BookServiceClient {
+	
+	@GetMapping
+	public List<Book> findAll();
 
-	@GetMapping("/take")
-	public List<Book> take(@RequestParam Integer userId, @RequestParam Integer bookId);
-
+	@GetMapping("/borrow")
+	public List<Book> borrowBook(@RequestParam Integer userId, @RequestParam Integer bookId);
+	
+	@GetMapping("/return")
+	public List<Book> returnBook(@RequestParam Integer userId, @RequestParam Integer bookId);
 }

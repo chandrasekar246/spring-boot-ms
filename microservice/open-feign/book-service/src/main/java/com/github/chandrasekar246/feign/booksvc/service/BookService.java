@@ -19,15 +19,19 @@ public class BookService {
 		return repo.create(user);
 	}
 
-	public Optional<Book> read(int id) {
-		return repo.read(id);
+	public Optional<Book> findById(int id) {
+		return repo.findById(id);
 	}
 
-	public List<Book> readAll() {
-		return repo.readAll();
+	public List<Book> findAll() {
+		return repo.findAll();
 	}
 
-	public List<Book> takeBook(Integer userId, Integer bookId) {
-		return repo.takeBook(userId, bookId);
+	public List<Book> borrowBook(Integer userId, Integer bookId) {
+		return repo.borrowBook(userId, bookId);
+	}
+	
+	public List<Book> returnBook(Integer userId, Integer bookId) {
+		return repo.returnBook(userId, bookId);
 	}
 }

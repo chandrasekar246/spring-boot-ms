@@ -1,5 +1,6 @@
 package com.github.chandrasekar246.feign.usersvc.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -32,35 +33,72 @@ public class UserController {
 	@PostMapping
 	public ResponseEntity<User> add(@RequestBody User user) {
 		Optional<User> optional = service.add(user);
+
 		return optional.isPresent() ? new ResponseEntity<>(optional.get(), HttpStatus.CREATED)
 				: new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> read(@PathVariable Integer id) {
-		Optional<User> optional = service.read(id);
+	public ResponseEntity<User> findById(@PathVariable Integer id) {
+		Optional<User> optional = service.findById(id);
+
 		return optional.isPresent() ? new ResponseEntity<>(optional.get(), HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping
-	public Set<User> readAll() {
-		return service.readAll();
+	public Set<User> findAll() {
+		return service.findAll();
 	}
 
-	@GetMapping("/{userId}/book/{bookId}")
-	public ResponseEntity<User> take(@PathVariable Integer userId, @PathVariable Integer bookId) {
-		Optional<User> optional = service.read(userId);
+	@GetMapping("/{userId}/library")
+	public ResponseEntity<List<Book>> findAllBooks(@PathVariable Integer userId) {
+		Optional<User> optional = service.findById(userId);
 
 		if (optional.isPresent()) {
+			return new ResponseEntity<>(bookServiceClient.findAll(), HttpStatus.OK);
+		}
 
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	@GetMapping("/{userId}/library/{bookId}/borrow")
+	public ResponseEntity<User> borrowBook(@PathVariable Integer userId, @PathVariable Integer bookId) {
+		Optional<User> optional = service.findById(userId);
+
+		if (optional.isPresent()) {
 			User user = optional.get();
 
-			List<Book> booksTaken = bookServiceClient.take(userId, bookId);
+			List<Book> booksTaken = bookServiceClient.borrowBook(userId, bookId);
 
 			user.setBooksTaken(booksTaken);
 
 			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	@GetMapping("/{userId}/library/{bookId}/return")
+	public ResponseEntity<User> returnBook(@PathVariable Integer userId, @PathVariable Integer bookId) {
+		Optional<User> optional = service.findById(userId);
+
+		if (optional.isPresent()) {
+			User user = optional.get();
+
+			Iterator<Book> iterator = user.getBooksTaken().iterator();
+
+			while (iterator.hasNext()) {
+				Book book = iterator.next();
+				
+				if (book.getId().equals(bookId)) {
+					List<Book> booksTaken = bookServiceClient.returnBook(userId, bookId);
+
+					user.setBooksTaken(booksTaken);
+
+					return new ResponseEntity<>(user, HttpStatus.OK);
+				}
+			}
 		}
 
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -33,11 +33,11 @@ public class UserRepo {
 		return Optional.empty();
 	}
 
-	public Optional<User> read(Integer id) {
+	public Optional<User> findById(Integer id) {
 		return userSet.stream().filter(p -> p.getId().equals(id)).findFirst();
 	}
 
-	public Set<User> readAll() {
+	public Set<User> findAll() {
 		return userSet;
 	}
 }
