@@ -18,11 +18,20 @@ public class Processor implements ItemProcessor<FoodMenu, FoodMenu> {
 
 	@Override
 	public FoodMenu process(FoodMenu menu) throws Exception {
-		Optional<FoodMenu> optionalMenu = repository.findByItem(menu.getItem());
+		menu.setCreatedDateTime(LocalDateTime.now());
 		menu.setUpdatedDateTime(LocalDateTime.now());
-		if (!optionalMenu.isPresent()) {
-			menu.setCreatedDateTime(LocalDateTime.now());
+		
+		Optional<FoodMenu> optionalMenu = repository.findByItem(menu.getItem());
+		
+		if (optionalMenu.isPresent()) {
+			FoodMenu updatedFoodMenu = optionalMenu.get();
+			
+			updatedFoodMenu.setUpdatedDateTime(LocalDateTime.now());
+			updatedFoodMenu.setPrice(menu.getPrice());
+			
+			menu = updatedFoodMenu;
 		}
+		
 		return menu;
 	}
 
