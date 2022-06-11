@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/job")
 public class JobInvokerController {
 
 	@Autowired
@@ -20,7 +22,7 @@ public class JobInvokerController {
 	@Qualifier("menuListJob")
 	Job menuListJob;
 
-	@GetMapping("/run-batch-job/{id}")
+	@GetMapping("/run/{id}")
 	public String handle(@PathVariable Long id) throws Exception {
 
 		JobParameters jobParameters = new JobParametersBuilder().addLong("job-id", id).toJobParameters();
