@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,7 +42,10 @@ public class OrderEntity {
 
 	private Double amount;
 
+	@CreationTimestamp
 	private LocalDateTime createdDateTime;
+	
+	private String accountNumber;
 
 	private Boolean paymentStatus;
 }

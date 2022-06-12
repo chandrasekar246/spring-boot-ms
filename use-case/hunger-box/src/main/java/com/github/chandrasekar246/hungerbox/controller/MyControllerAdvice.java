@@ -62,14 +62,5 @@ public class MyControllerAdvice {
 		return new ErrorResponse(ErrorCode.getErrorCode(DataIntegrityViolationException.class),
 				ex.getMostSpecificCause().getLocalizedMessage());
 	}
-
-//	@ExceptionHandler(value = { InvalidCustomerIdException.class, InvalidAccountIdException.class,
-//			InvalidBeneficiaryIdException.class, InvalidTransactionIdException.class,
-//			InvalidAccountNumberException.class, BeneficiaryNotRegisteredException.class,
-//			InsufficientBalanceException.class, DateRangeMismatchException.class })
-//	@ResponseStatus(HttpStatus.BAD_REQUEST)
-//	public ErrorResponse invalidDepartmentException(Exception ex) {
-//		return new ErrorResponse(ErrorCode.getErrorCode(ex.getClass()), ex.getLocalizedMessage());
-//	}
 	
 }

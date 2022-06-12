@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.chandrasekar246.hungerbox.HungerBoxApplication;
 import com.github.chandrasekar246.hungerbox.model.FoodMenu;
 import com.github.chandrasekar246.hungerbox.service.FoodMenuServiceClient;
 
@@ -18,7 +17,7 @@ import com.github.chandrasekar246.hungerbox.service.FoodMenuServiceClient;
 @RequestMapping("/item")
 public class ItemSearchController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(HungerBoxApplication.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ItemSearchController.class);
 
 	@Autowired
 	private FoodMenuServiceClient foodMenuServiceClient;

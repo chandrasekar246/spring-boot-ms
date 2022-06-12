@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.chandrasekar246.hungerbox.HungerBoxApplication;
 import com.github.chandrasekar246.hungerbox.entity.OrderEntity;
+import com.github.chandrasekar246.hungerbox.model.OrderRequest;
 import com.github.chandrasekar246.hungerbox.service.OrderService;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(HungerBoxApplication.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
 	@Autowired
 	private OrderService service;
@@ -46,15 +46,16 @@ public class OrderController {
 
 		return entity;
 	}
+	
+	@PostMapping("/checkout")
+	public OrderEntity checkout(@RequestBody OrderRequest orderRequest) {
+		LOGGER.debug("Order checkout request: {}", orderRequest);
 
-	@PostMapping
-	public OrderEntity save(@RequestBody OrderEntity entity) {
-		LOGGER.debug("Saving order with details: {}", entity);
-
-		OrderEntity result = service.save(entity);
+		OrderEntity result = service.checkout(orderRequest);
 
 		LOGGER.debug("Order details : {}", result);
 
 		return result;
 	}
+
 }
