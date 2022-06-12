@@ -8,8 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.github.chandrasekar246.banking.config.JwtAuthenticationFilter;
-
 @SpringBootApplication
 public class BankingApplication {
 	
@@ -32,8 +30,8 @@ public class BankingApplication {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public JwtAuthenticationFilter authenticationTokenFilterBean() {
-		return new JwtAuthenticationFilter();
-	}
+//	@Bean
+//	public JwtAuthenticationFilter authenticationTokenFilterBean() {
+//		return new JwtAuthenticationFilter();
+//	}
 }
