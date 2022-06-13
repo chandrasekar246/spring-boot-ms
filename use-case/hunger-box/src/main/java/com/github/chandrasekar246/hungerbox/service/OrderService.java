@@ -52,10 +52,10 @@ public class OrderService {
 
 	private double calculateAmount(Map<String, Integer> itemQuantityMap) {
 		return itemQuantityMap.entrySet().stream().filter(entry -> entry.getValue() > 0)
-				.flatMapToDouble(entry -> calc(entry)).sum();
+				.flatMapToDouble(entry -> callFoodServiceForPrice(entry)).sum();
 	}
 
-	private DoubleStream calc(Entry<String, Integer> entry) {
+	private DoubleStream callFoodServiceForPrice(Entry<String, Integer> entry) {
 		return DoubleStream.of(foodMenuServiceClient.findByItem(entry.getKey()).getPrice() * entry.getValue());
 	}
 
