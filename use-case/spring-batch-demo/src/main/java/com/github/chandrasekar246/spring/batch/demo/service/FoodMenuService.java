@@ -13,12 +13,17 @@ public class FoodMenuService {
 
 	@Autowired
 	private FoodMenuRepository repository;
-	
+
 	public List<FoodMenu> findAll() {
 		return repository.findAll();
 	}
-	
+
+	public FoodMenu findByItem(String item) {
+		return repository.findByItem(item).orElseThrow(() -> new RuntimeException("Unknown item: " + item));
+	}
+
 	public List<FoodMenu> findByItemContaining(String itemPattern) {
 		return repository.findByItemContaining(itemPattern);
 	}
+
 }

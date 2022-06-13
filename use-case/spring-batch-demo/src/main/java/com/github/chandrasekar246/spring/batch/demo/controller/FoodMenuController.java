@@ -23,6 +23,11 @@ public class FoodMenuController {
 		return service.findAll();
 	}
 	
+	@GetMapping("/{item}")
+	public FoodMenu findByItem(@PathVariable String item) {
+		return service.findByItem(item);
+	}
+	
 	@GetMapping("/search/{itemPattern}")
 	public List<FoodMenu> findByItemLike(@PathVariable String itemPattern) {
 		return service.findByItemContaining(itemPattern);

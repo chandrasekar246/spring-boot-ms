@@ -14,6 +14,9 @@ public interface FoodMenuServiceClient {
 	@GetMapping
 	public List<FoodMenu> findAll();
 	
+	@GetMapping("/{item}")
+	public FoodMenu findByItem(@PathVariable String item);
+	
 	@GetMapping("/search/{itemPattern}")
 	public List<FoodMenu> findByItemLike(@PathVariable String itemPattern);
 }

@@ -2,6 +2,8 @@ package com.github.chandrasekar246.hungerbox.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.DoubleStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +26,7 @@ public class OrderService {
 
 	@Autowired
 	private BankingServiceClient bankingServiceClient;
-	
+
 	@Autowired
 	private FoodMenuServiceClient foodMenuServiceClient;
 
@@ -37,7 +39,6 @@ public class OrderService {
 	}
 
 	public OrderEntity checkout(OrderRequest orderRequest) {
-
 		double amount = calculateAmount(orderRequest.getItemQuantityMap());
 
 		AmountTransfer amountTransfer = new AmountTransfer(orderRequest.getAccountNumber(), hungerBoxAccountNumber,
@@ -51,7 +52,11 @@ public class OrderService {
 
 	private double calculateAmount(Map<String, Integer> itemQuantityMap) {
 		return itemQuantityMap.entrySet().stream().filter(entry -> entry.getValue() > 0)
-				.mapToDouble(Map.Entry::getValue).sum();
+				.flatMapToDouble(entry -> calc(entry)).sum();
+	}
+
+	private DoubleStream calc(Entry<String, Integer> entry) {
+		return DoubleStream.of(foodMenuServiceClient.findByItem(entry.getKey()).getPrice() * entry.getValue());
 	}
 
 }
