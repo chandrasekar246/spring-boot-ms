@@ -35,7 +35,7 @@ public class OrderService {
 	}
 
 	public OrderEntity findById(Long id) {
-		return repository.findById(id).orElseThrow(() -> new InvalidOrderIdException("Unknown account ID: " + id));
+		return repository.findById(id).orElseThrow(() -> new InvalidOrderIdException("Unknown order ID: " + id));
 	}
 
 	public OrderEntity checkout(OrderRequest orderRequest) {
@@ -52,7 +52,7 @@ public class OrderService {
 
 	private double calculateAmount(Map<String, Integer> itemQuantityMap) {
 		return itemQuantityMap.entrySet().stream().filter(entry -> entry.getValue() > 0)
-				.flatMapToDouble(entry -> callFoodServiceForPrice(entry)).sum();
+				.flatMapToDouble(this::callFoodServiceForPrice).sum();
 	}
 
 	private DoubleStream callFoodServiceForPrice(Entry<String, Integer> entry) {
