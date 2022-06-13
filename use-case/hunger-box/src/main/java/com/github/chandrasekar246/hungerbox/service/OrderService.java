@@ -15,39 +15,43 @@ import com.github.chandrasekar246.hungerbox.repository.OrderRepository;
 
 @Service
 public class OrderService {
-	
+
 	@Value("${hungerBox.accountNumber}")
 	private String hungerBoxAccountNumber;
 
 	@Autowired
 	private OrderRepository repository;
-	
+
 	@Autowired
 	private BankingServiceClient bankingServiceClient;
+	
+	@Autowired
+	private FoodMenuServiceClient foodMenuServiceClient;
 
 	public List<OrderEntity> findAll() {
 		return (List<OrderEntity>) repository.findAll();
 	}
 
 	public OrderEntity findById(Long id) {
-		return repository.findById(id)
-				.orElseThrow(() -> new InvalidOrderIdException("Unknown account ID: " + id));
+		return repository.findById(id).orElseThrow(() -> new InvalidOrderIdException("Unknown account ID: " + id));
 	}
 
 	public OrderEntity checkout(OrderRequest orderRequest) {
-		
+
 		double amount = calculateAmount(orderRequest.getItemQuantityMap());
-		
-		AmountTransfer amountTransfer = new AmountTransfer(orderRequest.getAccountNumber(), hungerBoxAccountNumber, amount);
-		
+
+		AmountTransfer amountTransfer = new AmountTransfer(orderRequest.getAccountNumber(), hungerBoxAccountNumber,
+				amount);
+
 		bankingServiceClient.transfer(amountTransfer);
-		
-		return repository.save(new OrderEntity(null, orderRequest.getItemQuantityMap(), amount, null, orderRequest.getAccountNumber(), true));
+
+		return repository.save(new OrderEntity(null, orderRequest.getItemQuantityMap(), amount, null,
+				orderRequest.getAccountNumber(), true));
 	}
 
 	private double calculateAmount(Map<String, Integer> itemQuantityMap) {
-		// TODO Auto-generated method stub
-		return 100.5;
+		return itemQuantityMap.entrySet().stream().filter(entry -> entry.getValue() > 0)
+				.mapToDouble(Map.Entry::getValue).sum();
 	}
-	
+
 }
