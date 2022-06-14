@@ -13,7 +13,7 @@ spring:
     gateway:
       routes:
       - id: banking
-        uri: http://localhost:8080
+        uri: lb://BANKING-APP
         predicates:
         - Path=/banking/**
 

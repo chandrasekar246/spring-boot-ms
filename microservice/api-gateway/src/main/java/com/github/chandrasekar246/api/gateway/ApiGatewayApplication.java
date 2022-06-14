@@ -21,7 +21,7 @@ public class ApiGatewayApplication {
 
 //	@Bean
 //	public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
-//		return builder.routes().route("banking", r -> r.path("/banking").uri("lb://BANKING-APP")).build();
+//		return builder.routes().route("banking", r -> r.path("/banking/**").uri("lb://BANKING-APP")).build();
 //	}
 
 }
