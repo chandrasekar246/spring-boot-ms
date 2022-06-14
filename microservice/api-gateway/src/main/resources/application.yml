@@ -5,8 +5,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-  instance:
-    prefer-ip-address: true
       
 spring:
   application:
@@ -14,11 +12,16 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: book
-        uri: lb://book-service
+      - id: banking
+        uri: http://localhost:8080
         predicates:
-        - Path=/book/**
-      - id: user
-        uri: lb://user-service
-        predicates:
-        - Path=/user/**
+        - Path=/banking/**
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
