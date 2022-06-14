@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.github.chandrasekar246.hungerbox.model.FoodMenu;
 
-@FeignClient(name = "http://SPRING-BATCH-DEMO/food-menu")
+@FeignClient(name = "http://FOOD-MENU/food-menu/")
 public interface FoodMenuServiceClient {
 	
 	@GetMapping

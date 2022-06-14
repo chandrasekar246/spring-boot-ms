@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.github.chandrasekar246.hungerbox.model.AmountTransfer;
 import com.github.chandrasekar246.hungerbox.model.TransactionHistory;
 
-@FeignClient(name = "http://BANKING-APP/transfer")
+@FeignClient(name = "http://BANKING-APP/banking-app/transfer")
 public interface BankingServiceClient {
 	
 	@PostMapping
