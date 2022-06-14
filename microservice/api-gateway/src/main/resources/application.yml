@@ -16,6 +16,14 @@ spring:
         uri: lb://BANKING-APP
         predicates:
         - Path=/banking/**
+      - id: foodmenu
+        uri: lb://SPRING-BATCH-DEMO
+        predicates:
+        - Path=/foodmenu/**
+      - id: hungerbox
+        uri: lb://HUNGER-BOX
+        predicates:
+        - Path=/hungerbox/**
 
 management:
   endpoint:
